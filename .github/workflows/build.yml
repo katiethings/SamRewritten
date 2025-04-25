@@ -15,7 +15,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-latest]
         cc: [gcc]
     runs-on: ${{ matrix.os }}
     env:
@@ -23,14 +23,14 @@ jobs:
     steps:
     - run: sudo apt-get update -y
     - run: sudo apt-get install -y libgtkmm-3.0-dev libcurl4-gnutls-dev libyajl-dev valgrind
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - run: make
     - run: sudo make install
     - run: make clean
     - run: which samrewritten
     - run: cd package && ./build_appimage.sh
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: SamRewritten
         path: package/Sam*.AppImage 
